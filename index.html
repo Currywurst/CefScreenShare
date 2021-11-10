@@ -1,5 +1,6 @@
 <html>
   <body>
+    <a href="https://start_share">ScreenShare</a>
     <video id="video" width="720" height="540" autoplay muted></video>
   </body>
 </html>
@@ -17,9 +18,17 @@
       optional: []
   };
 
-  function startVideo() {
+  function startVideo( argShare ) {
       navigator.mediaDevices.getUserMedia({
-          video: conf
+          video: {
+                      mandatory: {
+                          chromeMediaSource: 'desktop',
+                          chromeMediaSourceId: argShare,
+                          maxWidth: 1280,
+                          maxHeight: 720
+                      },
+                      optional: []
+                  };
       }).then(
           stream => (video.srcObject = stream),
           err => console.log(err)
